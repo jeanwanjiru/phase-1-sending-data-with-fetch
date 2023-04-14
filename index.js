@@ -1,29 +1,25 @@
+const formData ={
+    name: "jean",
+    email : "jeanwanjiru06@gmail.com",
+}
+function submitData() {
 
-
-const formData = {
-    dogName: "Byron",
-    dogBreed: "Poodle",
-  };
-  
-  // method: "POST" is missing from the object below
-  const configurationObject = {
-    headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json",
-    },
-    body: JSON.stringify(formData),
-  };
-  
-  fetch("http://localhost:3000/dogs", configurationObject)
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (object) {
-      console.log(object);
-    })
-    .catch(function (error) {
-      alert("Bad things! Ragnarők!");
-      console.log(error.message);
-    });
-  
-  
+ fetch("http://localhost:3000/users", {
+   method: "POST",
+   headers: {
+     "Content-Type": "application/json",
+     Accept: "application/json",
+   },
+   body: JSON.stringify(formData),
+ })
+   .then((response) => response.json())
+   .then((data) => {
+     console.log(data);
+     document.body.innerHTML += `<p>${data.id}</p>`;
+   })
+   .catch((error) => {
+       alert("Bad things!");
+     console.log(error.message);
+     document.body.innerHTML += `<p>${error.message}</p>`;
+   });
+}
